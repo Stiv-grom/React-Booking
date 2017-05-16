@@ -17,17 +17,30 @@ var my_news = [
 	}
 ];
 
+class Article extends React.Component {
+	render() {
+		var data = this.props.data;
+		var articleTemplate;
+
+		return (
+			<div className="article">
+				<p className="news__author{index}">{data.author}:</p>
+				<p className="news__text">{data.text}</p>
+			</div>
+		);
+	}
+};
+
 class News extends React.Component {
 	render() {
 		var data = this.props.data;
 		var newsTemplate;
-		//data = [];
-		if (data && data.length > 0) {
+		//var data=[];
+		if (data.length > 0) {
 			newsTemplate = data.map(function(item, index) {
 				return (
 					<div key={index}>
-						<p className="news__author{index}">{item.author}:</p>
-						<p className="news__text">{item.text}</p>
+						<Article data={item} />
 					</div>
 				)
 			})
@@ -38,7 +51,7 @@ class News extends React.Component {
 		return (
 			<div className="news">
 				{newsTemplate}
-				<strong className={ (data && data.length > 0) ? '':'none'}>Всего новостей: {data.length}</strong>
+				<strong className={'news__count ' + (data.length > 0 ? '':'none') }>Всего новостей: {data.length}</strong>
 			</div>
 		);
 	}
@@ -58,10 +71,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
-				Всем привет, я компонент App! Я умею отображать новости.
-	<News data={my_news} />
+				<h3>Новости</h3>
+				<News data={my_news} />
 				And blog:
-	<Blog />
+				<Blog />
 			</div>
 		);
 	}
