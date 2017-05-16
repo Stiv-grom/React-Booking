@@ -21,7 +21,7 @@ class News extends React.Component {
 	render() {
 		var data = this.props.data;
 		var newsTemplate;
-		data = [];
+		//data = [];
 		if (data && data.length > 0) {
 			newsTemplate = data.map(function(item, index) {
 				return (
@@ -38,7 +38,7 @@ class News extends React.Component {
 		return (
 			<div className="news">
 				{newsTemplate}
-				<strong>Всего новостей: {data.length}</strong>
+				<strong className={ (data && data.length > 0) ? '':'none'}>Всего новостей: {data.length}</strong>
 			</div>
 		);
 	}
